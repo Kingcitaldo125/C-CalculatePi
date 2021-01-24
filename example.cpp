@@ -5,13 +5,9 @@
 #include <string>
 
 
-using std::cout;
-using std::endl;
-
-
-constexpr inline double calc_dividend(double& dividend)
+constexpr inline double calc_dividend(double& divisor_factor)
 {
-	double div = 4. / ((dividend) * (dividend + 1.) * (dividend + 2.));
+	double div = 4. / ((divisor_factor) * (divisor_factor + 1.) * (divisor_factor + 2.));
 	return div;
 }
 
@@ -21,10 +17,10 @@ double calc_pi(std::ofstream& file_logger)
 	double hldr = 3.;
 	bool sign = true;
 	const unsigned int approx_pi_places = 1'000'000;
-	double dividend = 2.;
+	double divisor_factor = 2.;
 	for (unsigned int i = 0; i < approx_pi_places; ++i)
 	{
-		double factor = calc_dividend(dividend);
+		double factor = calc_dividend(divisor_factor);
 		if (sign)
 		{
 			hldr += factor;
@@ -35,7 +31,7 @@ double calc_pi(std::ofstream& file_logger)
 			hldr -= factor;
 			sign = true;
 		}
-		dividend += 2;
+		divisor_factor += 2;
 		file_logger << "Places: " << i+1  << ":" << hldr << "\n";
 	}
 
